@@ -24,7 +24,9 @@ SECRET_KEY = 'c3j+c9rzgcs9p^m&#9ru)!)@n!%tzn1=m+m34&eeh4s$1f&0ch'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+import os
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 ALLOWED_HOSTS = ['ip.std-860.ist.mospolytech.ru']
 
 
@@ -49,11 +51,16 @@ INSTALLED_APPS = [
     'api',
     'import_export',
     'django_extensions',
+    'corsheaders',
 ]
 
 SITE_ID = 1
 
+CORS_ORIGIN_ALLOW_ALL = True
+
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -138,10 +145,6 @@ USE_TZ = True
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
-GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
-}
 
 import os.path
 import sys

@@ -1,30 +1,39 @@
 from rest_framework import serializers
-from recipes.models import Author, Recipe, Сategory_product, Ingredient
+from recipes.models import Authors, Recipe, Kitchen, Сategorie
+from django.contrib.auth.models import User
+
+
 
 class RecipeSerializer(serializers.ModelSerializer):
-
+    # kitchen = serializers.StringRelatedField()
+    # category = serializers.StringRelatedField()
+    # author = serializers.StringRelatedField()
     class Meta:
         model = Recipe
-        fields = ['id', 'title', 'category', 'description', 'published', 'author']
+        fields = ['id', 'title', 'category', 'kitchen', 'ingredients', 'description', 'published', 'author', 'photo']
 
 
-class Сategory_productSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Сategory_product
-        fields = ['id', 'category_product']
-
-
-class IngredientSerializer(serializers.ModelSerializer):
+class AuthorsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Ingredient
-        fields = ['id', 'ingredient']
+        model = Authors
+        fields = ['authorId', 'name', 'surname', 'photo']
 
-
-class AuthorSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Author
-        fields = ['id', 'author']
+        model = User
+        fields = ['is_superuser']
 
+class KitchenSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Kitchen
+        fields = ['id', 'kitchen']
+
+class СategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Сategorie
+        fields = ['id', 'category']
+   
